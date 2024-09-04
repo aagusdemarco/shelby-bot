@@ -1,0 +1,44 @@
+name: Twitter Bot
+
+# Ejecutar el bot a las 8:00 y a las 20:00 todos los días
+on:
+  schedule:
+    - cron: '* 8,20 * * *'
+  
+  # También se puede ejecutar manualmente desde GitHub Actions
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Clonar el repositorio
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Configurar Node.js versión 22.7.0
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.7.0'  # Especifica la versión de Node.js que necesitas (v22.7.0)
+
+      # 3. Instalar dependencias
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Configurar variables de entorno usando los secretos de GitHub
+      - name: Set environment variables
+        run: |
+          echo "API_KEY=${{ secrets.API_KEY }}" >> $GITHUB_ENV
+          echo "API_SECRET=${{ secrets.API_SECRET }}" >> $GITHUB_ENV
+          echo "ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN }}" >> $GITHUB_ENV
+          echo "ACCESS_SECRET=${{ secrets.ACCESS_SECRET }}" >> $GITHUB_ENV
+          echo "BEARER_TOKEN=${{ secrets.BEARER_TOKEN }}" >> $GITHUB_ENV
+          echo "APP_ID=${{ secrets.APP_ID }}" >> $GITHUB_ENV
+          echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> $GITHUB_ENV
+          echo "PORT=4000" >> $GITHUB_ENV
+
+      # 5. Ejecutar el bot
+      - name: Run Twitter Bot
+        run: node index.js 
