@@ -48,7 +48,7 @@ const postQuote = async () => {
 };
 
 // CronJob that automates the tweets 2 times a day
-const cronTweet = new CronJob("30 8,20 * * *", async () => {
+const cronTweet = new CronJob("30 9,21 * * *", async () => {
   try {
     await postQuote();
   } catch (e) {
