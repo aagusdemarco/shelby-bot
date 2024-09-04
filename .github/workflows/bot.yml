@@ -6,7 +6,7 @@ on:
     - cron: '30 8,20 * * *'
   
   # También se puede ejecutar manualmente desde GitHub Actions
-  # workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   run-bot:
