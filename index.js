@@ -4,12 +4,6 @@ require("dotenv").config({ path: __dirname + "/.env" });
 // Configure all the necessary packages
 const { twitterClient } = require("./twitterClient.js");
 const sqlite3 = require('sqlite3').verbose();
-const CronJob = require("cron").CronJob;
-const express = require('express')
-
-// Initialize express
-const app = express()
-const port = process.env.PORT || 4000;
 
 // Query the databes for random quotes
 let db = new sqlite3.Database('./scraper/shelby-quotes.db');
@@ -47,46 +41,5 @@ const postQuote = async () => {
 	}
 };
 
-// CronJob that automates the tweets 2 times a day
-//const cronTweet = new CronJob("30 12,0 * * *", async () => {
-//  try {
-//    await postQuote();
-//  } catch (e) {
-//    console.log(e);
-//  }
-//});
-
-// Call the Cron function
-//cronTweet.start();
-
+// Call the postQuote function
 postQuote();
-
-// Configure express app
-app.get('/', (req, res) => {
-	res.send('Cron is running');
-});
-
-// Route to fetch random quote
-app.get('/quote', async (req, res) => {
-	try {
-		const quote = await getQuote();
-		res.send(quote);
-	} catch (e) {
-		res.status(500).send(e)
-	}
-});
-
-// Manually post tweet from app
-app.post('/tweet', async (req, res) => {
-	try {
-		const quote = await getQuote();
-		await tweet(quote);
-		res.send('tweeted: ' + quote);
-	} catch (e) {
-		res.status(500).send(e);
-	}
-});
-
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`)
-});
