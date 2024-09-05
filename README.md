@@ -56,7 +56,7 @@ The project uses GitHub Actions for continuous integration and automation. The w
 5. **Run Twitter Bot**: Executes the `index.js` script to fetch a random quote and tweet it.
 
 ### `.env` (Not included in the repository for security reasons)
-This file contains environment variables such as API keys and tokens for authenticating with the Twitter API. It is required to run the bot locally and should be created following the `.env.example` template, which is not provided for security purposes.
+This file contains environment variables such as API keys and tokens for authenticating with the Twitter API. It is required to run the bot locally and its functionality is instead replaced by GitHub Repository Secrets, which allow the bot to work properly.
 
 ## Design Choices
 The project involves a combination of Python and JavaScript to leverage the strengths of both languages. Python, with its robust libraries like BeautifulSoup and Requests, is ideal for web scraping tasks, while JavaScript with Node.js offers an efficient way to interact with the Twitter API.
