@@ -3,7 +3,10 @@ name: Twitter Bot
 # Ejecutar el bot a las 8:00 y a las 16:00 todos los días (GMT-3)
 on:
   schedule:
-    - cron: '0 11,19 * * *'
+  # Horario Normal
+    #- cron: '0 11,19 * * *'
+  # Horario de prueba cada 5 minutos  
+    - cron: '*/5 * * * *'
   
   # También se puede ejecutar manualmente desde GitHub Actions
   #workflow_dispatch:
