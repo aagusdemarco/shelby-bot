@@ -6,6 +6,8 @@
 
 The primary purpose of this project is to scrape quotes from a specific website, store them in a database, and automatically tweet them at specified intervals using a scheduled job. The bot is configured to tweet at 8:00 AM and 4:00 PM GMT-3 every day.
 
+Simple yet powerful, this automation tool combines web scraping, data management, and social media automation in a compact project. It demonstrates how different programming languages and tools can work together to create a cohesive and automated solution for posting content on social media.
+
 ## Project Structure
 
 ### `index.js`
@@ -60,7 +62,3 @@ This file contains environment variables such as API keys and tokens for authent
 The project involves a combination of Python and JavaScript to leverage the strengths of both languages. Python, with its robust libraries like BeautifulSoup and Requests, is ideal for web scraping tasks, while JavaScript with Node.js offers an efficient way to interact with the Twitter API.
 
 We chose SQLite3 for the database because it is lightweight and serverless, which fits well with the simplicity and portability of this project. For deployment and automation, GitHub Actions was selected due to its seamless integration with GitHub and its powerful automation capabilities.
-
-## Conclusion
-Shelby Bot is a simple yet powerful automation tool that combines web scraping, data management, and social media automation in a compact project. It demonstrates how different programming languages and tools can work together to create a cohesive and automated solution for posting content on social media.
-
