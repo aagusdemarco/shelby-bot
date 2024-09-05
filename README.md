@@ -34,7 +34,7 @@ This Python script scrapes quotes from the web and populates the SQLite3 databas
 
 3. **SQLite3**: Python's built-in library for managing SQLite databases. It is used to create a database (`shelby-quotes.db`) and insert the scraped quotes into a table named `peaky_blinders`.
 
-The scraper script first fetches the quotes from the website, cleans and formats them, and then inserts them into the database. The use of SQLite3 ensures that the database is lightweight and easy to set up.
+The scraper script first fetches the quotes from the website, cleans and formats them, discards the unwanted items, and then inserts them into the database. The use of SQLite3 ensures that the database is lightweight and easy to set up.
 
 ### `twitterClient.js`
 This file contains the configuration and setup for the Twitter client using the Twitter API v2. It manages the connection and authentication to the Twitter API, providing methods to post tweets programmatically.
@@ -59,6 +59,6 @@ The project uses GitHub Actions for continuous integration and automation. The w
 This file contains environment variables such as API keys and tokens for authenticating with the Twitter API. It is required to run the bot locally and its functionality is instead replaced by GitHub Repository Secrets, which allow the bot to work properly.
 
 ## Design Choices
-The project involves a combination of Python and JavaScript to leverage the strengths of both languages. Python, with its robust libraries like BeautifulSoup and Requests, is ideal for web scraping tasks, while JavaScript with Node.js offers an efficient way to interact with the Twitter API.
+The project involves a combination of Python and JavaScript to leverage the strengths of both languages. Python, with its robust libraries like BeautifulSoup and Requests, is ideal for web scraping tasks, while JavaScript with Node.js offers an efficient way to interact with the Twitter API. Furthermore, both interact well with SQL databases.
 
-We chose SQLite3 for the database because it is lightweight and serverless, which fits well with the simplicity and portability of this project. For deployment and automation, GitHub Actions was selected due to its seamless integration with GitHub and its powerful automation capabilities.
+We chose SQLite3 for the database because it is lightweight and easy to use, which fits well with the simplicity and portability of this project. For deployment and automation, GitHub Actions was selected due to its powerful automation capabilities without the necessity of a traditional deploy (which usually cost a few bucks).
