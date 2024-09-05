@@ -48,16 +48,18 @@ const postQuote = async () => {
 };
 
 // CronJob that automates the tweets 2 times a day
-const cronTweet = new CronJob("30 12,0 * * *", async () => {
-  try {
-    await postQuote();
-  } catch (e) {
-    console.log(e);
-  }
-});
+//const cronTweet = new CronJob("30 12,0 * * *", async () => {
+//  try {
+//    await postQuote();
+//  } catch (e) {
+//    console.log(e);
+//  }
+//});
 
 // Call the Cron function
-cronTweet.start();
+//cronTweet.start();
+
+postQuote();
 
 // Configure express app
 app.get('/', (req, res) => {
