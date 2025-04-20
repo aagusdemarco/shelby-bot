@@ -44,36 +44,48 @@ const getNonRepeatedQuote = () => {
 						reject(err);
 						return;
 					}
-					
-					// Continue with getting a quote after reset
-					getRandomQuote();
-				});
-			} else {
-				// If there are unposted quotes, get one
-				getRandomQuote();
-			}
-		});
-		
-		// Function to get a random unposted quote
-		function getRandomQuote() {
-			const query = "SELECT rowid, quotes FROM peaky_blinders WHERE posted = 0 ORDER BY RANDOM() LIMIT 1";
-			db.get(query, (err, row) => {
-				if (err) {
-					reject(err);
-				} else if (row) {
-					// Mark the quote as posted
-					db.run("UPDATE peaky_blinders SET posted = 1 WHERE rowid = ?", [row.rowid], (err) => {
+					// After resetting, get a random quote
+					db.get("SELECT rowid, quotes FROM peaky_blinders ORDER BY RANDOM() LIMIT 1", (err, row) => {
 						if (err) {
 							reject(err);
 							return;
 						}
-						resolve(row.quotes);
+						if (row) {
+							// Mark the quote as posted
+							db.run("UPDATE peaky_blinders SET posted = 1 WHERE rowid = ?", [row.rowid], (err) => {
+								if (err) {
+									reject(err);
+									return;
+								}
+								resolve(row.quotes);
+							});
+						} else {
+							reject("No quote found");
+						}
 					});
-				} else {
-					reject("No quote found");
-				}
-			});
-		}
+				});
+			} else {
+				// If there are unposted quotes, get one
+				db.get("SELECT rowid, quotes FROM peaky_blinders WHERE posted = 0 ORDER BY RANDOM() LIMIT 1", (err, row) => {
+					if (err) {
+						reject(err);
+						return;
+					}
+					if (row) {
+						// Mark the quote as posted
+						db.run("UPDATE peaky_blinders SET posted = 1 WHERE rowid = ?", [row.rowid], (err) => {
+							if (err) {
+								reject(err);
+								return;
+							}
+							resolve(row.quotes);
+						});
+					} else {
+						reject("No quote found");
+					}
+				});
+			}
+		});
 	});
 };
 
